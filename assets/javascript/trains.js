@@ -11,12 +11,14 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-
 var name = '';
 var dest = '';
 var freq = '';
 var first = '';
 
+function refresh() {
+  createRow();
+}
 
 function createRow() {
   var newRow = $('<tr>');
@@ -27,7 +29,21 @@ function createRow() {
   var etaCol = $('<td>');
 
   var firstTrain = moment(first, 'HH:mm');
-  console.log(`firstTrain: ${firstTrain.format('hh:mm a')}`);
+  // console.log(`firstTrain: ${firstTrain.format('hh:mm a')}`);
+  console.log(firstTrain);
+  console.log(moment());
+
+  // if (moment().isBefore(firstTrain)) {
+  //   var next = moment(firstTrain, 'hh:mm a');
+  //   var eta = moment(firstTrain).diff(moment(), 'minutes') + 1;
+  // }
+  // else {
+  //   var diff = moment().diff(moment(firstTrain), 'minutes');
+  //   var mod = diff % freq;
+  //   var eta = freq - mod;
+  //   var nextTrain = moment().add(eta, 'minutes');
+  //   var next = moment(nextTrain).format('hh:mm a');
+  // }
 
   if (moment().isBefore(firstTrain)) {
     var next = firstTrain.format('hh:mm a');
@@ -47,7 +63,7 @@ function createRow() {
   newRow.append(nextCol.text(next));
   newRow.append(etaCol.text(eta));
 
-  $('#train-table').append(newRow);
+  $('#train-table').append(newRow); 
 }
 
 database.ref().on('child_added', function(snapshot) {
@@ -66,20 +82,13 @@ $('#submit').on('click', function(event) {
   name = $('#name-input').val().trim();
   dest = $('#dest-input').val().trim();
   freq = $('#freq-input').val().trim();
-  // next = moment(nextTrain).format('MM/DD/YYYY');
-  
-  console.log(name);
-  console.log(dest);
-  console.log(freq);
-  console.log(first);
-  
 
   database.ref().push({
     name: name,
     dest: dest,
     freq: freq,
     first: first,
-  });
-
-  // createRow();
+  });  
 });
+
+// setInterval(refresh(), 60000);
