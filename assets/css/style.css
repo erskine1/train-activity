@@ -1,4 +1,14 @@
 .spacer, .form-container {
+  margin-top: 32px;
   margin-bottom: 32px;
+}
+
+.form-row {
+  margin-top: 5px;
+}
+
+#timeNote {
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 

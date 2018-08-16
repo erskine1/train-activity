@@ -1,77 +1,74 @@
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyDPCCklkAEMdwAZuyiPaLoBB_wgYgl_CwI",
-  authDomain: "codersbay-402c8.firebaseapp.com",
-  databaseURL: "https://codersbay-402c8.firebaseio.com",
-  projectId: "codersbay-402c8",
-  storageBucket: "codersbay-402c8.appspot.com",
-  messagingSenderId: "846003266265"
+  apiKey: "AIzaSyCuvebUBeuzbDRWlB01OWO0eXO4HUM1TIc",
+  authDomain: "train-2081e.firebaseapp.com",
+  databaseURL: "https://train-2081e.firebaseio.com",
+  projectId: "train-2081e",
+  storageBucket: "train-2081e.appspot.com",
+  messagingSenderId: "355494074362"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
 
 
 var name = '';
-var role = '';
-var date = '';
-var rate = '';
-var time = '';
-var earnings = '';
+var dest = '';
+var freq = '';
+var next = '';
+var eta = '';
 
 function createRow() {
   // do stuff
   var newRow = $('<tr>');
   var nameCol = $('<td>');
-  var roleCol = $('<td>');
-  var dateCol = $('<td>');
-  var rateCol = $('<td>');
-  var timeCol = $('<td>');
-  var earnCol = $('<td>');
+  var destCol = $('<td>');
+  var freqCol = $('<td>');
+  var nextCol = $('<td>');
+  var etaCol = $('<td>');
 
   newRow.append(nameCol.text(name));
-  newRow.append(roleCol.text(role));
-  newRow.append(dateCol.text(date));
-  newRow.append(rateCol.text(rate));
-  newRow.append(timeCol.text(time));
-  newRow.append(earnCol.text(earnings));
-  $('#table-body').append(newRow);
+  newRow.append(destCol.text(dest));
+  newRow.append(freqCol.text(freq));
+  newRow.append(nextCol.text(next));
+  newRow.append(etaCol.text(eta));
+
+  $('#train-table').append(newRow);
 }
 
 database.ref().on('child_added', function(snapshot) {
-  var startDate = snapshot.val().date;
+  var nextTrain = snapshot.val().next;
 
   name = snapshot.val().name;
-  role = snapshot.val().role;
-  date = moment(startDate).format('MM/DD/YYYY');
-  rate = snapshot.val().rate;
-  time = snapshot.val().time;
-  earnings = snapshot.val().earnings;
+  dest = snapshot.val().dest;
+  freq = snapshot.val().freq;
+  next = moment(nextTrain).format('MM/DD/YYYY');
+  eta = snapshot.val().eta;
 
   createRow();
 });
 
 $('#submit').on('click', function(event) {
   event.preventDefault();
-  var startDate = $('#start-input').val().trim();
+  var nextTrain = $('#first-input').val().trim();
 
   name = $('#name-input').val().trim();
-  role = $('#role-input').val().trim();
-  date = moment(startDate).format('MM/DD/YYYY');
-  rate = $('#rate-input').val().trim();
-
+  dest = $('#dest-input').val().trim();
+  freq = $('#freq-input').val().trim();
+  next = moment(nextTrain).format('MM/DD/YYYY');
+  
   console.log(name);
-  console.log(role);
-  console.log(date);
-  console.log(rate);
+  console.log(dest);
+  console.log(freq);
+  console.log(next);
+  
 
   database.ref().push({
     name: name,
-    role: role,
-    date: date,
-    rate: rate,
-    time: time,
-    earnings: earnings,
+    dest: dest,
+    freq: freq,
+    next: next,
+    eta: eta,
   });
 
   // createRow();

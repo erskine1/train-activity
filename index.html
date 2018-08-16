@@ -3,8 +3,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>employees</title>
-    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+    <title>Train Schedule</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -13,45 +12,43 @@
   </head>
 
   <body>
-
     <div class="jumbotron text-center">
       <div class="title">
-          <h3>employee data</h3>
+          <h3>Train Schedule</h3>
       </div>
     </div>
 
     <div class="container">
       <div class="spacer">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form">
-          Add an Employee
+          Add a Train
         </button>
       </div>
-
+  
       <div class="collapse form-container card" id="form">
         <div class="card-body">
           <form>
 
             <div class="form-row">
               <div class="col">
-                <label for="name-input">Name</label>
-                <input type="text" class="form-control" id="name-input" placeholder="your name">
+                <label for="name-input">Train Name</label>
+                <input type="text" class="form-control" id="name-input" placeholder="">
               </div>
               <div class="col">
-                <label for="role-input">Role</label>
-                <input type="text" class="form-control" id="role-input" placeholder="your title">
+                <label for="dest-input">Destination</label>
+                <input type="text" class="form-control" id="dest-input" placeholder="">
               </div>
             </div>
 
             <div class="form-row">
               <div class="col">
-                <label for="start-input">Start date</label>
-                <!-- changing type to text temporarily -->
-                <input type="date" class="form-control" id="start-input" placeholder="MM/DD/YYYY">
+                <label for="first-input">First Train Time</label>
+                <input type="text" class="form-control" id="first-input" placeholder="HH:mm*">
+                <small id="timeNote" class="form-text text-muted">*military time</small>
               </div>
               <div class="col">
-                <label for="rate-input">Monthly Rate</label>
-                <input type="text" class="form-control" id="rate-input" placeholder="your monthly rate">
-                <small id="rateNote" class="form-text text-muted">Be honest.</small>
+                <label for="freq-input">Frequency</label>
+                <input type="text" class="form-control" id="freq-input" placeholder="your monthly rate">
               </div>
             </div>
 
@@ -60,25 +57,25 @@
         </div>
       </div>
 
+
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Current Employees</h5>
+          <h5 class="card-title">Current Train Schedule</h5>
           <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">Monthly Rate</th>
-                  <th scope="col">Months employed</th>
-                  <th scope="col">Total earnings</th>
-                </tr>
-              </thead>
-              <tbody id="table-body"></tbody>
-            </table>
+            <thead>
+              <tr>
+                <th scope="col">Train Name</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Frequency (minutes)</th>
+                <th scope="col">Next Arrival</th>
+                <th scope="col">Minutes Away</th>
+                <!-- <th scope="col"></th> -->
+              </tr>
+            </thead>
+            <tbody id="train-table"></tbody>
+          </table>
         </div>
       </div>
-
     </div>
     
     
