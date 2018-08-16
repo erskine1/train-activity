@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>employees</title>
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+
+    <div class="jumbotron text-center">
+      <div class="title">
+          <h3>employee data</h3>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="spacer">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form">
+          Add an Employee
+        </button>
+      </div>
+
+      <div class="collapse form-container card" id="form">
+        <div class="card-body">
+          <form>
+
+            <div class="form-row">
+              <div class="col">
+                <label for="name-input">Name</label>
+                <input type="text" class="form-control" id="name-input" placeholder="your name">
+              </div>
+              <div class="col">
+                <label for="role-input">Role</label>
+                <input type="text" class="form-control" id="role-input" placeholder="your title">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <label for="start-input">Start date</label>
+                <!-- changing type to text temporarily -->
+                <input type="date" class="form-control" id="start-input" placeholder="MM/DD/YYYY">
+              </div>
+              <div class="col">
+                <label for="rate-input">Monthly Rate</label>
+                <input type="text" class="form-control" id="rate-input" placeholder="your monthly rate">
+                <small id="rateNote" class="form-text text-muted">Be honest.</small>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Current Employees</h5>
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">Monthly Rate</th>
+                  <th scope="col">Months employed</th>
+                  <th scope="col">Total earnings</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+        </div>
+      </div>
+
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+    <script src="assets/javascript/time.js"></script>
+  </body>
+</html>
