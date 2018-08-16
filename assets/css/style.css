@@ -7,8 +7,17 @@
   margin-top: 5px;
 }
 
+#freq-input::-webkit-inner-spin-button,
+#freq-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #timeNote {
   margin-bottom: 5px;
   margin-left: 5px;
 }
 
+.train-schedule {
+  margin-bottom: 32px;
+}

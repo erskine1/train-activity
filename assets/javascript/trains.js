@@ -15,17 +15,31 @@ var database = firebase.database();
 var name = '';
 var dest = '';
 var freq = '';
-var next = '';
-var eta = '';
+var first = '';
+
 
 function createRow() {
-  // do stuff
   var newRow = $('<tr>');
   var nameCol = $('<td>');
   var destCol = $('<td>');
   var freqCol = $('<td>');
   var nextCol = $('<td>');
   var etaCol = $('<td>');
+
+  var firstTrain = moment(first, 'HH:mm');
+  console.log(`firstTrain: ${firstTrain.format('hh:mm a')}`);
+
+  if (moment().isBefore(firstTrain)) {
+    var next = firstTrain.format('hh:mm a');
+    var eta = moment(firstTrain).diff(moment(), 'minutes') + 1;
+  }
+  else {
+    var diff = moment().diff(moment(firstTrain), 'minutes');
+    var mod = diff % freq; 
+    var eta = freq - mod;
+    var nextTrain = moment().add(eta, 'minutes');
+    var next = moment(nextTrain).format('hh:mm a');
+  }
 
   newRow.append(nameCol.text(name));
   newRow.append(destCol.text(dest));
@@ -37,38 +51,34 @@ function createRow() {
 }
 
 database.ref().on('child_added', function(snapshot) {
-  var nextTrain = snapshot.val().next;
-
   name = snapshot.val().name;
   dest = snapshot.val().dest;
   freq = snapshot.val().freq;
-  next = moment(nextTrain).format('MM/DD/YYYY');
-  eta = snapshot.val().eta;
+  first = snapshot.val().first;
 
   createRow();
 });
 
 $('#submit').on('click', function(event) {
   event.preventDefault();
-  var nextTrain = $('#first-input').val().trim();
+  var first = $('#first-input').val().trim();
 
   name = $('#name-input').val().trim();
   dest = $('#dest-input').val().trim();
   freq = $('#freq-input').val().trim();
-  next = moment(nextTrain).format('MM/DD/YYYY');
+  // next = moment(nextTrain).format('MM/DD/YYYY');
   
   console.log(name);
   console.log(dest);
   console.log(freq);
-  console.log(next);
+  console.log(first);
   
 
   database.ref().push({
     name: name,
     dest: dest,
     freq: freq,
-    next: next,
-    eta: eta,
+    first: first,
   });
 
   // createRow();

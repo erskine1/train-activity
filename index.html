@@ -43,12 +43,13 @@
             <div class="form-row">
               <div class="col">
                 <label for="first-input">First Train Time</label>
+                <!-- type time takes 12 hour time with AM/PM in chrome -->
                 <input type="text" class="form-control" id="first-input" placeholder="HH:mm*">
                 <small id="timeNote" class="form-text text-muted">*military time</small>
               </div>
               <div class="col">
-                <label for="freq-input">Frequency</label>
-                <input type="text" class="form-control" id="freq-input" placeholder="your monthly rate">
+                <label for="freq-input">Frequency (minutes)</label>
+                <input type="number" class="form-control" id="freq-input" placeholder="">
               </div>
             </div>
 
@@ -58,7 +59,7 @@
       </div>
 
 
-      <div class="card">
+      <div class="card train-schedule">
         <div class="card-body">
           <h5 class="card-title">Current Train Schedule</h5>
           <table class="table">
@@ -78,9 +79,9 @@
       </div>
     </div>
     
-    
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
-    <script src="assets/javascript/time.js"></script>
+    <script src="assets/javascript/trains.js"></script>
   </body>
 </html>
