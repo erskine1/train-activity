@@ -1,5 +1,5 @@
 
-// Initialize Firebase
+// Firebase
 var config = {
   apiKey: "AIzaSyCuvebUBeuzbDRWlB01OWO0eXO4HUM1TIc",
   authDomain: "train-2081e.firebaseapp.com",
@@ -9,17 +9,15 @@ var config = {
   messagingSenderId: "355494074362"
 };
 firebase.initializeApp(config);
-var database = firebase.database();
 
+// Variables
+var database = firebase.database();
 var name = '';
 var dest = '';
 var freq = '';
 var first = '';
 
-function refresh() {
-  createRow();
-}
-
+// Functions
 function createRow() {
   var newRow = $('<tr>');
   var nameCol = $('<td>');
@@ -29,29 +27,14 @@ function createRow() {
   var etaCol = $('<td>');
 
   var firstTrain = moment(first, 'HH:mm');
-  // console.log(`firstTrain: ${firstTrain.format('hh:mm a')}`);
-  console.log(firstTrain);
-  console.log(moment());
-
-  // if (moment().isBefore(firstTrain)) {
-  //   var next = moment(firstTrain, 'hh:mm a');
-  //   var eta = moment(firstTrain).diff(moment(), 'minutes') + 1;
-  // }
-  // else {
-  //   var diff = moment().diff(moment(firstTrain), 'minutes');
-  //   var mod = diff % freq;
-  //   var eta = freq - mod;
-  //   var nextTrain = moment().add(eta, 'minutes');
-  //   var next = moment(nextTrain).format('hh:mm a');
-  // }
 
   if (moment().isBefore(firstTrain)) {
-    var next = firstTrain.format('hh:mm a');
+    var next = moment(firstTrain).format('hh:mm a');
     var eta = moment(firstTrain).diff(moment(), 'minutes') + 1;
   }
   else {
     var diff = moment().diff(moment(firstTrain), 'minutes');
-    var mod = diff % freq; 
+    var mod = diff % freq;
     var eta = freq - mod;
     var nextTrain = moment().add(eta, 'minutes');
     var next = moment(nextTrain).format('hh:mm a');
@@ -66,6 +49,7 @@ function createRow() {
   $('#train-table').append(newRow); 
 }
 
+// Events
 database.ref().on('child_added', function(snapshot) {
   name = snapshot.val().name;
   dest = snapshot.val().dest;
@@ -88,7 +72,10 @@ $('#submit').on('click', function(event) {
     dest: dest,
     freq: freq,
     first: first,
-  });  
+  });
+  
+  $('#first-input').val('');
+  $('#name-input').val('');
+  $('#dest-input').val('');
+  $('#freq-input').val('');
 });
-
-// setInterval(refresh(), 60000);

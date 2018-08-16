@@ -1,6 +1,65 @@
+body {
+  background: #bdaa87;
+}
+.jumbotron {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background: #74664c;
+  color: #e0d6c0;
+}
+
+.btn, input.form-control, .card {
+  border-radius: 0;
+}
+
+.form-control {
+  background: #bdaa87;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: #74664c;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #7e745f;
+  border: none;
+}
+
+.btn-primary:focus {
+  background: #74664c;
+  box-shadow: none;
+}
+
+/* I hate bootstrap */
+.btn-primary:active {
+  background: #7e745f !important;
+  box-shadow: none !important;
+}
+
+#add-train {
+  margin-left: 15px;
+}
+
+.card {
+  background: #cec1a6;
+}
+
 .spacer, .form-container {
   margin-top: 32px;
   margin-bottom: 32px;
+}
+
+.table thead th {
+  border-bottom: 2px solid #74664c;
+}
+
+.table td, .table th {
+  border-top: 1px solid #74664c;
 }
 
 .form-row {
@@ -21,3 +80,4 @@
 .train-schedule {
   margin-bottom: 32px;
 }
+
